@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 短信流水表[short_msg_flow]SQLMapper自动映射 -->
+<mapper namespace="com.ysepay.smgateway.dao.mapper.Short_msgMapper">
+	
+	<!-- 插入一个数据持久化对象(插入字段为传入PO实体的非空属性) -->
+	<insert id="insert"  parameterType="Short_msgPO">
+		INSERT INTO SHORT_MSG (
+		<if test="merchant_no != null and merchant_no != ''">
+	         merchant_no, <!-- 商户号 -->
+		</if>
+		<if test="app_id != null and app_id != ''">
+	         app_id, <!-- 应用id -->
+		</if>
+		<if test="src != null and src != ''">
+	         src, <!-- 来源 -->
+		</if>
+		<if test="gateway_msgid != null">
+	         gateway_msgid, <!-- 网关消息id -->
+		</if>
+		<if test="msgid != null and msgid != ''">
+	         msgid, <!-- 商户消息id -->
+		</if>
+		<if test="mobile != null and mobile != ''">
+	         mobile, <!-- 电话号码 -->
+		</if>
+		<if test="mw_msgid != null and mw_msgid != ''">
+	         mw_msgid, <!-- 通道消息id -->
+		</if>
+		<if test="app_sign != null and app_sign != ''">
+	         app_sign, <!-- 应用签名 -->
+		</if>
+		<if test="messagesign != null and messagesign != ''">
+	         messagesign, <!-- 消息签名 -->
+		</if>
+		<if test="channel != null and channel != ''">
+	         channel, <!-- 渠道 -->
+		</if>
+		<if test="content_count != null">
+	         content_count, <!-- 短信字数 -->
+		</if>
+		<if test="msg_count != null">
+	         msg_count, <!-- 短信条数 -->
+		</if>
+		<if test="createtime != null">
+	         createtime, <!-- 创建时间 -->
+		</if>
+		<if test="status != null and status != ''">
+	         status, <!-- 状态(0:初始化 1:申请成功 2:申请失败 3:发送成功 4:发送失败) -->
+		</if>
+		<if test="descs != null and descs != ''">
+	         descs, <!-- 渠道返回的状态描述 -->
+		</if>
+		<if test="fetch_state != null and fetch_state != ''">
+	         fetch_state, <!-- 申请状态 -->
+		</if>
+		<if test="channel_account != null and channel_account != ''">
+	         channel_account, <!-- 渠道账号 -->
+		</if>
+		<if test="send_time != null">
+	         send_time, <!-- 短信网关向通道上送短信的时间 -->
+		</if>
+		<if test="receive_time != null">
+	         receive_time, <!-- 用户接收到短信的时间 -->
+		</if>
+		<if test="message != null and message != ''">
+	         message <!-- 消息 -->
+		</if>
+		)VALUES(
+		<if test="merchant_no != null and merchant_no != ''">
+	          #{merchant_no, jdbcType=VARCHAR}, <!-- 商户号 -->
+	    </if>
+		<if test="app_id != null and app_id != ''">
+	          #{app_id, jdbcType=VARCHAR}, <!-- 应用id -->
+	    </if>
+		<if test="src != null and src != ''">
+	          #{src, jdbcType=VARCHAR}, <!-- 来源 -->
+	    </if>
+		<if test="gateway_msgid != null and gateway_msgid != ''">
+	          #{gateway_msgid, jdbcType=VARCHAR}, <!-- 网关消息id -->
+	    </if>
+		<if test="msgid != null">
+	          #{msgid, jdbcType=VARCHAR}, <!-- 商户消息id -->
+	    </if>
+		<if test="mobile != null and mobile != ''">
+	          #{mobile, jdbcType=VARCHAR}, <!-- 电话号码 -->
+	    </if>
+		<if test="mw_msgid != null and mw_msgid != ''">
+	          #{mw_msgid, jdbcType=VARCHAR}, <!-- 通道消息id -->
+	    </if>
+		<if test="app_sign != null and app_sign != ''">
+	          #{app_sign, jdbcType=VARCHAR}, <!-- 应用签名 -->
+	    </if>
+		<if test="messagesign != null and messagesign != ''">
+	          #{messagesign, jdbcType=VARCHAR}, <!-- 消息签名 -->
+	    </if>
+		<if test="channel != null and channel != ''">
+	          #{channel, jdbcType=VARCHAR}, <!-- 渠道 -->
+	    </if>
+		<if test="content_count != null">
+	          #{content_count, jdbcType=NUMERIC}, <!-- 短信字数 -->
+	    </if>
+		<if test="msg_count != null">
+	          #{msg_count, jdbcType=NUMERIC}, <!-- 短信条数 -->
+	    </if>
+		<if test="createtime != null">
+	          #{createtime}, <!-- 创建时间 -->
+	    </if>
+		<if test="status != null and status != ''">
+	          #{status, jdbcType=VARCHAR}, <!-- 状态(0:初始化 1:申请成功 2:申请失败 3:发送成功 4:发送失败) -->
+	    </if>
+		<if test="descs != null and descs != ''">
+	          #{descs, jdbcType=VARCHAR}, <!-- 渠道返回的状态描述 -->
+	    </if>
+		<if test="fetch_state != null and fetch_state != ''">
+	          #{fetch_state, jdbcType=VARCHAR}, <!-- 申请状态 -->
+	    </if>
+		<if test="channel_account != null and channel_account != ''">
+	          #{channel_account, jdbcType=VARCHAR}, <!-- 渠道账号 -->
+	    </if>
+		<if test="send_time != null">
+	          #{send_time}, <!-- 短信网关向通道上送短信的时间 -->
+	    </if>
+		<if test="receive_time != null">
+	          #{receive_time}, <!-- 用户接收到短信的时间 -->
+	    </if>
+		<if test="message != null and message != ''">
+	          #{message, jdbcType=VARCHAR} <!-- 消息 -->
+	    </if>
+		)
+	</insert>
+	
+	<!-- 获取短信id -->
+	<select id="getGatewayMsgId" resultType="java.lang.String">
+		select SEQ_SHORT_MSG_ID.NEXTVAL FROM DUAL
+	</select>
+	
+	<!-- 根据msgid修改数据持久化对象 -->
+	<update id="updateByGatewayMsgid" parameterType="Short_msgPO">
+		UPDATE SHORT_MSG
+		<set>
+			<if test="mw_msgid != null">
+		          mw_msgid = #{mw_msgid, jdbcType=VARCHAR},  <!-- 通道消息id -->
+			</if>
+			<if test="status != null">
+		          status = #{status, jdbcType=VARCHAR},  <!-- 状态 -->
+			</if>
+			<if test="descs != null">
+		          descs = #{descs, jdbcType=VARCHAR},  <!-- 回执状态描述 -->
+			</if>
+			<if test="fetch_state != null">
+		          fetch_state = #{fetch_state, jdbcType=VARCHAR},  <!-- 申请状态 -->
+			</if>
+			<if test="send_time != null">
+		          send_time = #{send_time},  <!-- 短信网关向通道上送短信的时间 -->
+			</if>
+			<if test="receive_time != null">
+		          receive_time = #{receive_time},  <!-- 用户接收到短信的时间 -->
+			</if>
+			<if test="gateway_msgid != null">
+		          gateway_msgid = #{gateway_msgid}  <!-- 网关消息id -->
+			</if>
+		</set>
+		<where>
+			gateway_msgid = #{gateway_msgid}
+		</where>
+	</update>
+	
+	<!-- 根据mw_msgid修改数据持久化对象 -->
+	<update id="updateByMWMsgid" parameterType="Short_msgPO">
+		UPDATE SHORT_MSG
+		<set>
+			<if test="status != null">
+		          status = #{status, jdbcType=VARCHAR},  <!-- 状态 -->
+			</if>
+			<if test="descs != null">
+		          descs = #{descs, jdbcType=VARCHAR},  <!-- 回执状态描述 -->
+			</if>
+			<if test="fetch_state != null">
+		          fetch_state = #{fetch_state, jdbcType=VARCHAR},  <!-- 申请状态 -->
+			</if>
+			<if test="receive_time != null">
+		          receive_time = #{receive_time},  <!-- 用户接收到短信的时间 -->
+			</if>
+			<if test="mw_msgid != null">
+		          mw_msgid = #{mw_msgid, jdbcType=VARCHAR}  <!-- 通道消息id -->
+			</if>
+		</set>
+		<where>
+			mw_msgid = #{mw_msgid}
+		</where>
+	</update>
+</mapper>

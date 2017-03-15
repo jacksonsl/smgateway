@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 短信回复[msg_reply]SQLMapper自动映射 -->
+<mapper namespace="com.ysepay.smgateway.dao.mapper.Msg_replyMapper">
+	
+	<!-- 插入一个数据持久化对象(插入字段为传入PO实体的非空属性) -->
+	<insert id="insert"  parameterType="Msg_replyPO">
+		INSERT INTO msg_reply (
+		<if test="merchant_no != null and merchant_no != ''">
+	         merchant_no, <!-- 商户号 -->
+		</if>
+		<if test="app_id != null and app_id != ''">
+	         app_id, <!-- 应用id -->
+		</if>
+		<if test="msgid != null">
+	         msgid, <!-- 消息id -->
+		</if>
+		<if test="channel_code != null and channel_code != ''">
+	         channel_code, <!-- 渠道编码 -->
+		</if>
+		<if test="channel_msg_id != null and channel_msg_id != ''">
+	         channel_msg_id, <!-- 渠道消息id -->
+		</if>
+		<if test="mobile_no != null and mobile_no != ''">
+	         mobile_no, <!-- 电话号码 -->
+		</if>
+		<if test="reply_content != null and reply_content != ''">
+	         reply_content, <!-- 回复内容 -->
+		</if>
+		<if test="deliver_msg != null and deliver_msg != ''">
+	         deliver_msg, <!-- 推送信息 -->
+		</if>
+		<if test="receive_time != null">
+	         receive_time <!-- 接收时间 -->
+		</if>
+		)VALUES(
+		<if test="merchant_no != null and merchant_no != ''">
+	          #{merchant_no, jdbcType=VARCHAR}, <!-- 商户号 -->
+	    </if>
+		<if test="app_id != null and app_id != ''">
+	          #{app_id, jdbcType=VARCHAR}, <!-- 应用id -->
+	    </if>
+		<if test="msgid != null">
+	          #{msgid, jdbcType=NUMERIC}, <!-- 消息id -->
+	    </if>
+		<if test="channel_code != null and channel_code != ''">
+	          #{channel_code, jdbcType=VARCHAR}, <!-- 渠道编码 -->
+	    </if>
+		<if test="channel_msg_id != null and channel_msg_id != ''">
+	          #{channel_msg_id, jdbcType=VARCHAR}, <!-- 渠道消息id -->
+	    </if>
+		<if test="mobile_no != null and mobile_no != ''">
+	          #{mobile_no, jdbcType=VARCHAR}, <!-- 电话号码 -->
+	    </if>
+		<if test="reply_content != null and reply_content != ''">
+	          #{reply_content, jdbcType=VARCHAR}, <!-- 回复内容 -->
+	    </if>
+		<if test="deliver_msg != null and deliver_msg != ''">
+	          #{deliver_msg, jdbcType=VARCHAR}, <!-- 推送信息 -->
+	    </if>
+		<if test="receive_time != null">
+	          #{receive_time} <!-- 接收时间 -->
+	    </if>
+		)
+	</insert>
+	
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 短信渠道[msg_channel]SQLMapper自动映射 -->
+<mapper namespace="com.ysepay.smgateway.dao.mapper.Msg_channelMapper">
+
+	<!-- 表字段 -->
+	<sql id="column">
+		CHANNEL_CODE,  <!-- 渠道编码 -->
+		CHANNEL_NAME,  <!-- 渠道商名称 -->
+		CHANNEL_STATUS,  <!-- 渠道状态 -->
+		CREATE_TIME  <!-- 渠道创建时间 -->
+	</sql>
+	
+	<!-- 根据编码查询并返回数据持久化对象 -->
+	<select id="selectByCode" resultType="Msg_channelPO">
+		SELECT
+		<include refid="column" />
+		FROM MSG_CHANNEL c
+		<where>
+			c.CHANNEL_CODE = #{channelCode}
+		</where> 
+	</select>
+</mapper>

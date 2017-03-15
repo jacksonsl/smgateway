@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 商户渠道路由[merchant_channel_route]SQLMapper自动映射 -->
+<mapper namespace="com.ysepay.smgateway.dao.mapper.Merchant_channel_routeMapper">
+
+	<!-- 表字段 -->
+	<sql id="column">
+		  MERCHANT_NO,  <!-- 商户号 -->
+		  APP_ID,  <!-- 应用id -->
+		  CHANNEL_CODE,  <!-- 渠道编码 -->
+		  CHANNEL_ACCOUNT,  <!-- 渠道账号 -->
+		  TYPE,  <!-- 账号类型 -->
+		  APP_SIGN,  <!-- 应用签名 -->
+		  PRIORITY,  <!-- 渠道优先级，数字越大优先级越高 -->
+		  WEIGHT,  <!-- 渠道权重 -->
+		  STATUS  <!-- 路由状态(0:停用 1:正常) -->
+	</sql>
+	
+	<!-- 根据主键查询并返回数据持久化对象 -->
+	<select id="selectByAppId" resultType="Merchant_channel_routePO">
+		SELECT
+		    <include refid="column" />
+		FROM MERCHANT_CHANNEL_ROUTE r
+		<where>
+			r.APP_ID = #{appId}
+			<if test="type != null and type != ''">
+		        AND type = #{type}
+			</if>
+			<if test="type == null">
+		        AND type is null
+			</if>
+		</where>
+		ORDER BY r.PRIORITY DESC
+	</select>
+	
+</mapper>

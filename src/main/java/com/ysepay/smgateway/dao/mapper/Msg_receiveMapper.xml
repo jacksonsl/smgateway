@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 短信接收[msg_receive]SQLMapper自动映射 -->
+<mapper namespace="com.ysepay.smgateway.dao.mapper.Msg_receiveMapper">
+	
+	<!-- 插入一个数据持久化对象(插入字段为传入PO实体的非空属性) -->
+	<insert id="insert"  parameterType="Msg_receivePO">
+		INSERT INTO msg_receive (
+		<if test="channel_id != null and channel_id != ''">
+	         channel_id, <!-- 渠道id -->
+		</if>
+		<if test="channel_msg_id != null and channel_msg_id != ''">
+	         channel_msg_id, <!-- 渠道消息id -->
+		</if>
+		<if test="mobile_no != null and mobile_no != ''">
+	         mobile_no, <!-- 电话号码 -->
+		</if>
+		<if test="msg_content != null and msg_content != ''">
+	         msg_content, <!-- 短信内容 -->
+		</if>
+		<if test="receive_time != null">
+	         receive_time, <!-- 接收时间 -->
+		</if>
+		)VALUES(
+		<if test="channel_id != null and channel_id != ''">
+	          #{channel_id, jdbcType=VARCHAR}, <!-- 渠道id -->
+	    </if>
+		<if test="channel_msg_id != null and channel_msg_id != ''">
+	          #{channel_msg_id, jdbcType=VARCHAR}, <!-- 渠道消息id -->
+	    </if>
+		<if test="mobile_no != null and mobile_no != ''">
+	          #{mobile_no, jdbcType=VARCHAR}, <!-- 电话号码 -->
+	    </if>
+		<if test="msg_content != null and msg_content != ''">
+	          #{msg_content, jdbcType=VARCHAR}, <!-- 短信内容 -->
+	    </if>
+		<if test="receive_time != null">
+	          #{receive_time, jdbcType=DATE}, <!-- 接收时间 -->
+	    </if>
+		)
+	</insert>
+	
+	<!-- 根据主键修改数据持久化对象 -->
+	<update id="updateByKey" parameterType="Msg_receivePO">
+		UPDATE msg_receive
+		<set>
+			<if test="channel_id != null">
+		          channel_id = #{channel_id, jdbcType=VARCHAR},  <!-- 渠道id -->
+			</if>
+			<if test="channel_msg_id != null">
+		          channel_msg_id = #{channel_msg_id, jdbcType=VARCHAR},  <!-- 渠道消息id -->
+			</if>
+			<if test="mobile_no != null">
+		          mobile_no = #{mobile_no, jdbcType=VARCHAR},  <!-- 电话号码 -->
+			</if>
+			<if test="msg_content != null">
+		          msg_content = #{msg_content, jdbcType=VARCHAR},  <!-- 短信内容 -->
+			</if>
+			<if test="receive_time != null">
+		          receive_time = #{receive_time, jdbcType=DATE},  <!-- 接收时间 -->
+			</if>
+		</set>
+		WHERE 
+	</update>
+	
+	<!-- 根据主键删除数据持久化对象 -->
+	<delete id="deleteByKey">
+		DELETE FROM msg_receive WHERE 
+	</delete>
+
+</mapper>

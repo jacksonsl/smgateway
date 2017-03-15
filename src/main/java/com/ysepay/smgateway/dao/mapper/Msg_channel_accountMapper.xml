@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 短信渠道账号[msg_channel_account]SQLMapper自动映射 -->
+<mapper namespace="com.ysepay.smgateway.dao.mapper.Msg_channel_accountMapper">
+
+	<!-- 查询并返回数据持久化对象 -->
+	<select id="selectByCodeAndAccount" resultType="Msg_channel_accountPO">
+		SELECT
+		<include refid="column" />
+		FROM MSG_CHANNEL_ACCOUNT a
+		<where>
+			a.ACCOUNT = #{channelAccount} AND a.CHANNEL_CODE = #{channelCode}
+		</where> 
+	</select>
+
+	<!-- 表字段 -->
+	<sql id="column">
+		  URL,  <!-- 渠道网关地址 -->
+		  ACCOUNT,  <!-- 渠道账号 -->
+		  PWD,  <!-- 渠道密码 -->
+		  BALANCE,  <!-- 渠道短信余额 -->
+		  ACCOUNT_STATUS,  <!-- 渠道状态 -->
+		  CHANNEL_CODE  <!-- 渠道编码 -->
+	</sql>
+	
+</mapper>

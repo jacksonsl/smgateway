@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 商户应用[merchant_app]SQLMapper自动映射 -->
+<mapper namespace="com.ysepay.smgateway.dao.mapper.Merchant_appMapper">
+	
+	<!-- 表字段 -->
+	<sql id="column">
+		MERCHANT_NO,  <!-- 商户号 -->
+		APP_CODE,  <!-- 应用编码 -->
+		APP_STATUS,  <!-- 应用状态(1:正常 2:停用) -->
+		APP_NAME,  <!-- 应用名称 -->
+		CONTACT_PERSON,  <!-- 负责人,使用人 -->
+		APP_ID,  <!-- 应用ID -->
+		APP_KEY,  <!-- 应用KEY -->
+		CREATE_TIME,  <!-- 应用创建时间 -->
+		STATUS_RETURN_URL,  <!-- 状态回送地址 -->
+		REPLY_RETURN_URL,  <!-- 回复回送地址 -->
+		MSG_BALANCE  <!-- 短信余额 -->
+	</sql>
+
+	<!-- 根据主键查询并返回数据持久化对象 -->
+	<select id="selectByAppId" resultType="Merchant_appPO">
+		SELECT
+		<include refid="column" />
+		FROM MERCHANT_APP a
+		<where>
+			a.app_id = #{appId}
+		</where>
+	</select>
+	
+</mapper>
